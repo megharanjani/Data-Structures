@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+int s[20],top=-1,max,a;
+void main()
+{
+int n;
+printf("Enter the size of stack\n");
+scanf("%d",&max);
+do{
+printf("\nEnter 1 to push an element\n");
+printf("Enter 2 to pop an element\n");
+printf("Enter 3 to display the stack\n");
+printf("Enter 4 to exit\n");
+scanf("%d",&n);
+switch(n){
+case 1: push();
+	break;
+case 2: pop();
+	break;
+case 3: display();
+	break;
+case 4: exit(0);
+default: printf("Error, enter valid number");
+	}
+}while(n!=4);
+}
+
+void push(int data)
+{
+if(top==max-1)
+	printf("Cannot push element, stack is full");
+else
+	printf("Enter data to be pushed\n");
+	scanf("%d",&a);
+	{
+	top=top+1;
+	s[top]=a;
+	}
+}
+
+void pop(int data)
+{
+
+if(top==-1)
+	printf("Cannot pop element, stack is empty");
+	
+else
+	printf("Data to be popped : %d\n",a);
+	{
+	a=s[top];
+	top=top-1;
+	}
+}
+
+void display()
+{
+int i;
+if (top==-1)
+	printf("Stack is empty\n");
+else
+	{
+	for(i=0;i<=top;i++)
+	printf("\n%d\n",s[i]);
+	}
+}
