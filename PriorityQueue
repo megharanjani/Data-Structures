@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define m_size 3
+
+void enqueue(int data);
+void dequeue(int data);
+void display();
+int isempty();
+int isfull();
+
+int pqueue[m_size];
+int front=-1,rear=-1;
+
+void main(){
+	int ch,a;
+	do{
+		printf("Enter 1 to add element to the queue\nEnter 2 to remove element from the queue\nEnter 3 to display the queue\nEnter 4 to exit\n");
+		printf("Enter your choice\n");
+		scanf("%d",&ch);
+		switch(ch){
+			case 1:
+				printf("enter the element to be added to the queue:");
+				scanf("%d",&a);
+				enqueue(a);
+				break;
+			case 2:
+				printf("enter the element to be removed from the queue:");
+				scanf("%d",&a);
+				dequeue(a);
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(-1);
+			default:
+				printf("invalid input\n");
+				break;
+		}
+	}while(ch!=4);
+}
+
+int isempty(){
+	if(front==-1){
+		return 1;}
+	else{
+		return(front>rear);}
+}
+
+int isfull(){
+	return(rear>=m_size-1);
+}
+
+void enqueue(int data){
+	if(front==-1){
+		front=0;
+		rear=0;
+		pqueue[rear]=data;
+		}
+	else{
+		if(isfull()){
+			printf("queue overflow\n");
+		}
+		else{
+			rear++;
+			for(int i=front;i<=rear;i++){
+				if(data<pqueue[i]){
+					for(int j=rear-1;j>=i;j--){
+						pqueue[j+1]=pqueue[j];
+					}
+					pqueue[i]=data;
+					break;
+				}
+				else if(i==rear){
+					pqueue[i]=data;}
+			}
+		}
+	}
+}
+
+void dequeue(int data){
+	if(isempty()){
+		printf("\nqueue underflow\n");
+	}
+	else{
+		int flag=0;
+		for(int i=0;i<=rear;i++){
+			if(data==pqueue[i]){
+				printf("%d has been removed from the queue\n",data);
+				for(int j=i;j<rear;j++){
+					pqueue[j]=pqueue[j+1];}
+				rear--;
+				flag=1;
+				break;
+			}
+		}
+	}
+}
+
+void display(){
+	if(isempty()){
+		printf("\nthe queue is empty\n");}
+	else{
+		int i;
+		printf("\n the queue is:\n");
+		for(i=front;i<=rear;i++){
+			printf("%d\n",pqueue[i]);}
+	}
+}
+	
