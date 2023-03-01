@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* link;
+
+};
+struct node* top; 
+ 
+ void enqueue()
+ {
+    int d;
+     printf("enter ther data");
+ scanf("%d",&d);
+    struct node* newnode,*ptr;
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data=d;
+    newnode->link=NULL;
+    if(top==NULL)
+    top = newnode;
+    else{
+        ptr = top;
+        while(ptr->link!=NULL)
+        {
+            ptr=ptr->link;
+        } 
+        ptr->link=newnode;
+    }
+    
+    
+
+    }
+ 
+
+void dequeue(){
+struct node* temp;
+if(top==NULL)
+printf("\n stack empty");
+else{
+    temp = top;
+    printf("deleted element: %d",temp->data);
+    top=top->link;
+    temp=NULL;
+
+}
+
+}
+void display()
+{
+    struct node* ptr;
+    if(top==NULL)
+    printf("\n stack empty");
+    else
+    {
+        ptr = top;
+        printf("stack elemnts :");
+        while(ptr!=NULL){
+            printf("%d\t",ptr->data);
+            ptr=ptr->link;
+        }
+
+    }
+
+}
+void main()
+{
+
+int  ch,data;
+do
+{
+
+printf(" \n 1.PUSH \n 2.POP \n 3.DISPLAY \n 4.exit \n enter your choice");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+
+
+enqueue();
+break;
+case 2:
+
+
+dequeue();
+
+break;
+case 3 :
+display();
+break;
+case 4:
+exit(-1);
+default:printf("invalid input");
+}
+}while(ch!=4);
+}
