@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+char a[20],p[20];
+char s[20]; //infix to postfix conversion
+int s1[20]; //postfix evaluation
+int top=-1,top1=-1;
+int precedence(char c) //returns the predence of the operator
+{
+ switch(c)
+ {
+ case '+':
+ case '-':return 1;
+ 
+ case '*':
+ case '/':return 2;
+ 
+ case '^':return 3;
+ 
+ }
+ 
+}
+void infix_to_postfix()
+{
+ int i=0,j=0; //i for I[],j for p[]
+ char x,y;
+ while(a[i] !='\0')
+ {
+ if(isdigit(a[i]))
+ p[j++]=a[i];
+ else if(a[i] == '(')
+ s[top++]=a[i];
+ else if(a[i]==')')
+ {
+ while(s[top]!='(')
+ {
+ p[j++]=s[top--]; 
+ }
+ top--; // to pop the '('
+ }
+ else // operator
+ {
+ x=a[i];
+ y=s[top];
+ if(top==-1 || y=='(' || precedence(y)<precedence(x))
+ s[top++]=a[i];
+ else
+ {
+ while( top!=-1 && y!='(' && precedence(x)<=precedence(y))
+ {
+ p[j++]=s[top--];
+ y=s[top];
+ }
+ s[top++]=x;
+ }
+ }
+ i++;
+ }
+ while(top!=1)
+ {
+ p[j++]=s[top--];
+ }
+ p[j]='\0';
+ printf("postfix expression is %s",p);
+ 
+}
+void postfix_eval()
+{
+ int i,op1,op2,result;
+ char str[10];
+ for(i=0;i<strlen(p);i++)
+ {
+ if(isdigit(p[i]))
+ {
+ str[0]=p[i]; // operator is in the form of character
+ str[1]='\0'; 
+ s1[top1++]=atoi(str); // we are converting it into integers here
+ }
+ else
+ {
+ op2=s1[top1--];
+ op1=s1[top1--];
+ switch(p[i])
+ {
+ case '+': result=op1+op2;
+ break;
+ case '-': result=op1-op2;
+ break;
+ case '*': result=op1*op2;
+ break;
+ case '/': result=op1/op2;
+ break; 
+ case '^': result=pow(op1,op2);
+ break; 
+ }
+ s1[top1++]=result;
+ }
+ }
+ printf("\n result = %d",s1[0]);
+}
+void main()
+{
+ printf("enter infix expression ");
+ gets(a);
+ infix_to_postfix();
+ postfix_eval();
+}
