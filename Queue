@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<stdlib.h>
+int q[20],rear=-1,front=-1,max;
+
+void main()
+{
+int n;
+printf("Enter the size of queue\n");
+scanf("%d",&max);
+while(n!=4){
+printf("\nEnter 1 to enqueue\n");
+printf("Enter 2 to dequeue\n");
+printf("Enter 3 to display the queue\n");
+printf("Enter 4 to exit\n");
+scanf("%d",&n);
+switch(n){
+case 1: enqueue();
+	break;
+case 2: dequeue();
+	break;
+case 3: display();
+	break;
+case 4: exit(0);
+default: printf("Error, enter valid number");
+	}
+}
+}
+
+void enqueue(int data)
+{
+int a;
+	if (rear==max-1)
+	{
+	printf("Cannot add element, queue full\n");
+	}
+	
+	else 
+	if (front==-1)
+	front=0;
+	printf("Enter data to be added\n");
+	scanf("%d",&a);
+	{
+	rear=rear+1;
+	q[rear]=a;
+	}
+}
+
+void dequeue(int data)
+{
+int a;
+
+if (front==-1||front>rear)
+	{
+	printf("Cannot remove element, queue is empty\n");
+	return(0);
+	}
+else
+	{
+	printf("Element to be removed:");
+	printf("%d",q[front]);
+	front++;
+	}
+}
+
+void display()
+{
+int i;
+if (front==-1)
+	printf("queue is empty");
+else
+	{
+	for(i=front;i<=rear;i++)
+	printf("%d\n",q[i]);
+	}
+}
