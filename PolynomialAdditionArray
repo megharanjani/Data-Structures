@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+int p1[10],p2[10],p3[10];
+
+void main(){
+int n1,n2,x,i;
+printf("Enter the highest degree of the first polynomial:\n");
+scanf("%d",&n1);
+for(i=0;i<=n1;i++){
+	printf( "Enter the coefficient of x^%d\n",i);
+	scanf("%d",& p1[i]);
+	}
+	
+printf("Enter the highest degree of the second polynomial:\n");
+scanf("%d",&n2);
+for(i=0;i<=n2;i++){
+	printf( "Enter the coefficient of x^%d\n",i);
+	scanf("%d",& p2[i]);
+	}
+
+if(n1>n2){
+	for(i=0;i<=n1;i++){
+	p3[i]=p1[i]+p2[i];
+	}
+	
+	printf("The first polynomial is: ");
+	for (i=n1;i>0;i--)
+	{
+	printf(" %d(x^%d) +",p1[i],i);
+	}
+	{
+	printf(" %d\n",p1[0]);
+	}
+
+	printf("The second polynomial is: ");
+	for (i=n2;i>0;i--)
+	{
+	printf(" %d(x^%d) +",p2[i],i);
+	}
+	{
+	printf(" %d\n",p2[0]);
+	}
+	printf("The resultant polynomial is: ");
+	for (i=n1;i>0;i--)
+	{
+	printf(" %d(x^%d) +",p3[i],i);
+	}
+	{
+	printf(" %d\n",p3[0]);
+	}
+	}
+else{
+	for(i=0;i<=n2;i++){
+	p3[i]=p1[i]+p2[i];
+	}
+
+printf("The first polynomial is: ");
+for (i=n1;i>0;i--)
+	{
+	printf(" %d(x^%d) +",p1[i],i);
+	}
+	{
+	printf(" %d\n",p1[0]);
+	}
+
+printf("The second polynomial is: ");
+for (i=n2;i>0;i--)
+	{
+	printf(" %d(x^%d) +",p2[i],i);
+	}
+	{
+	printf(" %d\n",p2[0]);
+	}
+	
+
+printf("The resultant polynomial is: ");
+for (i=n2;i>0;i--)
+{
+printf(" %d(x^%d) +",p3[i],i);
+}
+{
+printf(" %d\n",p3[0]);
+}
+}
+}
